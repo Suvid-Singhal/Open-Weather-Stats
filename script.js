@@ -55,7 +55,7 @@ function getWeather(latitude, longitude){
             weather.city = data.name;
             weather.rain = data.precipitation;
             weather.country = data.sys.country;
-
+            console.log(weather.temperature);
             var ssunrise = new Date(weather.sunrise*1000);
             var sunrisehours = ssunrise.getHours();
             var sunriseminutes = ssunrise.getMinutes();
@@ -67,6 +67,7 @@ function getWeather(latitude, longitude){
             weather.sunset = sunsethours + ":" + sunsetminutes;
             weather.wind = weather.wind + ' km/hr';
             weather.rain = weather.rain + " mm";
+            console.log(weather.rain);
             tempElement.innerHTML = `${weather.temperature}°<span>C</span>`;
         })
         .then(function(){
