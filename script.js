@@ -64,7 +64,7 @@ function getWeather(latitude, longitude){
             var sunriseminutes = ssunrise.getMinutes();
             weather.sunrise = sunrisehours + ":" + sunriseminutes;
 
-            var ssunset = new Date(weather.sunrise*1000);
+            var ssunset = new Date(weather.sunset*1000);
             var sunsethours = ssunset.getHours();
             var sunsetminutes = ssunset.getMinutes();
             weather.sunset = sunsethours + ":" + sunsetminutes;
