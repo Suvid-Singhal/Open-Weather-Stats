@@ -10,9 +10,6 @@ var sunset = document.querySelector(".sunset");
 // App data
 const weather = {};
 
-weather.temperature = {
-    unit : "celsius"
-}
 
 // APP CONSTS AND VARS
 const KELVIN = 273.00;
@@ -42,7 +39,7 @@ function showError(error){
 
 // GET WEATHER FROM API PROVIDER
 function getWeather(latitude, longitude){
-    let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
+    let api = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
     
     fetch(api)
         .then(function(response){
@@ -68,7 +65,7 @@ function getWeather(latitude, longitude){
             var sunsethours = ssunset.getHours();
             var sunsetminutes = ssunset.getMinutes();
             weather.sunset = sunsethours + ":" + sunsetminutes;
-
+            weather.wind = weather.wind + ' km/hr';
             weather.rain = weather.rain + " mm";
             tempElement.innerHTML = `${weather.temperature}°<span>C</span>`;
         })
@@ -80,12 +77,17 @@ function getWeather(latitude, longitude){
 
 // DISPLAY WEATHER TO UI
 function displayWeather(){
-    iconElement.innerHTML = `<img src="https://github.com/Suvid-Singhal/Open-Weather-Stats/tree/master/icons/${weather.iconId}.png"/>`;
-    tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
+    iconElement.innerHTML = `<img src="icons/${weather.iconId}.png"/>`;
+    tempElement.innerHTML = `${weather.temperature}°<span>C</span>`;
     city.innerHTML = `${weather.city}`;
     country.innerHTML = `${weather.country}`;
     wind.innerHTML = `${weather.wind}`
-    rain.innerHTML = `${weather.rain}`
+    if(weather.rain === 'undefined mm'){
+        rain.innerHTML = `No Data!`
+    }
+    else{
+        rain.innerHTML = `${weather.rain}`
+    }
     sunrise.innerHTML = `${weather.sunrise}`
     sunset.innerHTML = `${weather.sunset}`
 
